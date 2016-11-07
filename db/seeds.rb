@@ -30,7 +30,7 @@ unless SmsMessage.any?
       body: "Message number #{i}",
       created_at: i.days.ago
     }
-    state = (i % 2).to_s
+    state = (i % 3).to_s
     account.sms_messages.create(message_attrs.merge(possible_states[state]))
   end
 end
