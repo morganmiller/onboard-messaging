@@ -25,7 +25,7 @@ class SmsMessage < ActiveRecord::Base
     end
   end
 
-  def originated_internally? #TODO: rename this
+  def originated_internally?
     sent_by_user? || sent_by_system?
   end
 
