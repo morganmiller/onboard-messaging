@@ -21,6 +21,8 @@ gem 'redcarpet'
 
 gem 'will_paginate', '~> 3.1.0'
 
+gem 'newrelic_rpm'
+
 group :development, :test do
   gem 'quiet_assets'
 
@@ -45,4 +47,8 @@ group :development do
   gem 'spring'
 
   gem 'rubocop'
+  gem 'logger'
+  gem 'capybara'
+  gem 'launchy'
+  gem 'poltergeist'
 end
