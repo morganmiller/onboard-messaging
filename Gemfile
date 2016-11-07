@@ -19,6 +19,8 @@ gem 'twitter-bootstrap-rails'
 # Literally just to render the dashboard
 gem 'redcarpet'
 
+gem 'will_paginate', '~> 3.1.0'
+
 group :development, :test do
   gem 'quiet_assets'
 

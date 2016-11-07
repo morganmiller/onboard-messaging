@@ -5,7 +5,7 @@ class MessageThread < ActiveRecord::Base
 
   after_save :count_unread_threads
 
-  scope :sorted, -> { order(created_at: :desc) }
+  scope :sorted, -> { order(created_at: :asc) }
 
   def set_unread_status(sms_message)
     update_attributes(unread: true)

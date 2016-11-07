@@ -3,6 +3,7 @@
     <h1><%=t '.title', :default => 'Communications' %></h1>
   </div>
   <%= render partial: "message_thread", collection: @message_threads %>
+  <%= will_paginate @message_threads, class: "digg_pagination", page_links: false %>
 </div>
 
 <div class="col-lg-8">
