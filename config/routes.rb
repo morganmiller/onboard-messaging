@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   resources :sms_messages, only: [:index]
   resources :message_threads, only: [:update]
 
+  get 'account/message_threads_count' => 'accounts#message_threads_count'
+
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

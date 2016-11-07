@@ -1,3 +1,13 @@
+var incrementCount = function() {
+  var counter = $('#unread-thread-count');
+  $.ajax({
+    type: 'GET',
+    url: "account/message_threads_count",
+  }).success(function(count){
+    counter.text(count['message_threads_count']);
+  })
+}
+
 var toggleRead = function(el, unreadStatus) {
   var threadId = $(el).data('threadId');
   $.ajax({
@@ -6,6 +16,7 @@ var toggleRead = function(el, unreadStatus) {
     data: { message_thread: {unread: unreadStatus} }
   }).success(function(messageThread){
     $(el).html(messageThread);
+    incrementCount();
   })
 }
 
