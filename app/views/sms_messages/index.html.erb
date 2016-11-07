@@ -1,32 +1,27 @@
-<%- model_class = SmsMessage -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+<div class="col-lg-4">
+  <div class="page-header">
+    <h1><%=t '.title', :default => 'Communications' %></h1>
+  </div>
+  <% @message_threads.each do |thread| %>
+    <div class='thread'>
+      <div class="from">
+        <%= thread.applicant_number %>
+      </div>
+      <div class="recent-message">
+        <% first_sms = thread.sms_messages.first %>
+        <%= first_sms.from_number %>: <%= first_sms.body %> <%= time_ago_in_words(first_sms.created_at) %> ago
+      </div>
+      <div class='messages'>
+        <!-- sms messages partial here -->
+        Test message <%= thread.id %>
+      </div>
+    </div>
+  <% end %>
+
 </div>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:user) %></th>
-      <th><%= model_class.human_attribute_name(:message_sid) %></th>
-      <th><%= model_class.human_attribute_name(:from_number) %></th>
-      <th><%= model_class.human_attribute_name(:to_number) %></th>
-      <th><%= model_class.human_attribute_name(:body) %></th>
-      <th><%= model_class.human_attribute_name(:outbound) %></th>
-      <th><%= model_class.human_attribute_name(:unread) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @sms_messages.each do |sms_message| %>
-      <tr>
-        <td><%= sms_message.user.name %></td>
-        <td><%= sms_message.message_sid %></td>
-        <td><%= sms_message.from_number %></td>
-        <td><%= sms_message.to_number %></td>
-        <td><%= sms_message.body %></td>
-        <td><%= sms_message.outbound %></td>
-        <td><%= sms_message.unread %></td>
-        <td><%=l sms_message.created_at %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+
+<div class="col-lg-8">
+  <div class="active-thread-messages">
+    Click a message to display
+  </div>
+</div>

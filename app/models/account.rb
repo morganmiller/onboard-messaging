@@ -3,4 +3,5 @@ class Account < ActiveRecord::Base
 
   has_many :users
   has_many :sms_messages
+  has_many :message_threads
 end
