@@ -2,6 +2,8 @@ class SmsMessage < ActiveRecord::Base
   belongs_to :account
   validates :account, presence: true
 
+  belongs_to :message_thread
+
   belongs_to :user
 
   scope :unread, -> { where(unread: true) }

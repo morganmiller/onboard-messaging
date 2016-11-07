@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161107001458) do
+ActiveRecord::Schema.define(version: 20161107021128) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,13 +25,14 @@ ActiveRecord::Schema.define(version: 20161107001458) do
   add_index "accounts", ["name"], name: "index_accounts_on_name", unique: true, using: :btree
 
   create_table "message_threads", force: :cascade do |t|
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
     t.string   "applicant_number"
     t.integer  "account_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   add_index "message_threads", ["account_id"], name: "index_message_threads_on_account_id", using: :btree
+  add_index "message_threads", ["applicant_number"], name: "index_message_threads_on_applicant_number", using: :btree
 
   create_table "sms_messages", force: :cascade do |t|
     t.integer  "account_id"
