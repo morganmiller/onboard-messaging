@@ -28,7 +28,6 @@ RSpec.describe SmsMessage, type: :model do
   it { should belong_to(:message_thread) }
 
   it 'triggers #assign_message_thread on create' do
-    user
     sms = account.sms_messages.build(
       user: user, from_number: "7274216505",
       to_number: "8006927753",
@@ -40,7 +39,6 @@ RSpec.describe SmsMessage, type: :model do
   end
 
   it 'assigns the correct message thread by applicant and account' do
-    user
     thread1 = MessageThread.create(account_id: account.id, applicant_number: "8006927754")
     thread2 = MessageThread.create(account_id: account.id, applicant_number: "8006927753")
 
@@ -50,28 +48,24 @@ RSpec.describe SmsMessage, type: :model do
   end
 
   it 'knows the account applicant\'s phone number' do
-    user
     expect(user_sms.applicant_number).to eq(user_sms.to_number)
     expect(system_sms.applicant_number).to eq(system_sms.to_number)
     expect(applicant_sms.applicant_number).to eq(applicant_sms.from_number)
   end
 
   it 'knows whether a message originated internally' do
-    user
     expect(user_sms.originated_internally?).to be(true)
     expect(system_sms.originated_internally?).to be(true)
     expect(applicant_sms.originated_internally?).to be(false)
   end
 
   it 'knows whether a message was sent by a user' do
-    user
     expect(user_sms.sent_by_user?).to be(true)
     expect(system_sms.sent_by_user?).to be(false)
     expect(applicant_sms.sent_by_user?).to be(false)
   end
 
   it 'knows whether a message was sent by the system' do
-    user
     expect(user_sms.sent_by_system?).to be(false)
     expect(system_sms.sent_by_system?).to be(true)
     expect(applicant_sms.sent_by_system?).to be(false)

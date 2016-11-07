@@ -21,7 +21,7 @@ gem 'redcarpet'
 
 group :development, :test do
   gem 'quiet_assets'
-  
+
   gem 'byebug'
   gem 'rspec-rails', '~> 3.0'
 
@@ -31,6 +31,8 @@ group :development, :test do
   gem 'zonebie'
 
   gem 'faker'
+
+  gem 'pry'
 end
 
 group :development do
