@@ -1,6 +1,36 @@
-.thread {
-  .messages {
-    display: none;
+.messages-container {
+  height: 500px;
+  .thread {
+    .messages {
+      display: none;
+    }
+  }
+  .active-thread-messages {
+    height: 100%;
+    overflow-x: scroll;
+    padding-top: 100px;
+    padding-left: 20px;
+    .mark-unread {
+      position: relative;
+      bottom: 50px;
+      left: 10px;
+    }
+  }
+  .message {
+    width: 65%;
+    border-radius: 10%;
+    margin-bottom: 5%;
+    padding: 5px 10px;
+    &.internal-true {
+      float: right;
+      clear: both;
+      background-color: #ADD8E6;
+    }
+    &.internal-false {
+      float: left;
+      clear: both;
+      background-color: #d3d3d3;
+    }
   }
 }
 
