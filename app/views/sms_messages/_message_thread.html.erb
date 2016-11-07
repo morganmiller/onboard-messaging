@@ -1,4 +1,4 @@
-<div class="thread unread-<%= message_thread.unread %>" data-thread-id="<%= message_thread.id %>">
+<div class="thread unread-<%= message_thread.unread %>" data-thread-id="<%= message_thread.id.to_s %>">
   <div class="from">
     UNREAD: <%= message_thread.unread %>
     <%= message_thread.applicant_number %>
@@ -8,6 +8,7 @@
     <%= last_sms.from_number %>: <%= last_sms.body %> <%= time_ago_in_words(last_sms.created_at) %> ago
   </div>
   <div class='messages'>
+    <button class="mark-unread" data-unread-id="<%= message_thread.id.to_s %>">Mark as Unread</button>
     <%= render partial: 'sms_messages/sms_message', collection: message_thread.sms_messages %>
   </div>
 </div>
