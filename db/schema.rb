@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160403191123) do
+ActiveRecord::Schema.define(version: 20161107001458) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,21 +24,32 @@ ActiveRecord::Schema.define(version: 20160403191123) do
 
   add_index "accounts", ["name"], name: "index_accounts_on_name", unique: true, using: :btree
 
+  create_table "message_threads", force: :cascade do |t|
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.string   "applicant_number"
+    t.integer  "account_id"
+  end
+
+  add_index "message_threads", ["account_id"], name: "index_message_threads_on_account_id", using: :btree
+
   create_table "sms_messages", force: :cascade do |t|
     t.integer  "account_id"
     t.integer  "user_id"
     t.string   "from_number"
     t.string   "to_number"
     t.text     "body"
-    t.boolean  "outbound",    default: false, null: false
-    t.boolean  "unread",      default: true,  null: false
+    t.boolean  "outbound",          default: false, null: false
+    t.boolean  "unread",            default: true,  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "message_thread_id"
   end
 
   add_index "sms_messages", ["account_id"], name: "index_sms_messages_on_account_id", using: :btree
   add_index "sms_messages", ["created_at"], name: "index_sms_messages_on_created_at", using: :btree
   add_index "sms_messages", ["from_number"], name: "index_sms_messages_on_from_number", using: :btree
+  add_index "sms_messages", ["message_thread_id"], name: "index_sms_messages_on_message_thread_id", using: :btree
   add_index "sms_messages", ["to_number"], name: "index_sms_messages_on_to_number", using: :btree
   add_index "sms_messages", ["user_id"], name: "index_sms_messages_on_user_id", using: :btree
 
@@ -55,4 +66,6 @@ ActiveRecord::Schema.define(version: 20160403191123) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["time_zone"], name: "index_users_on_time_zone", using: :btree
 
+  add_foreign_key "message_threads", "accounts"
+  add_foreign_key "sms_messages", "message_threads"
 end
