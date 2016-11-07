@@ -1,0 +1,12 @@
+<div class='thread'>
+  <div class="from">
+    <%= message_thread.applicant_number %>
+  </div>
+  <div class="recent-message">
+    <% last_sms = message_thread.sms_messages.last %>
+    <%= last_sms.from_number %>: <%= last_sms.body %> <%= time_ago_in_words(last_sms.created_at) %> ago
+  </div>
+  <div class='messages'>
+    <%= render partial: 'sms_message', collection: message_thread.sms_messages %>
+  </div>
+</div>

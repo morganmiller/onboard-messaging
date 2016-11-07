@@ -2,22 +2,7 @@
   <div class="page-header">
     <h1><%=t '.title', :default => 'Communications' %></h1>
   </div>
-  <% @message_threads.each do |thread| %>
-    <div class='thread'>
-      <div class="from">
-        <%= thread.applicant_number %>
-      </div>
-      <div class="recent-message">
-        <% first_sms = thread.sms_messages.first %>
-        <%= first_sms.from_number %>: <%= first_sms.body %> <%= time_ago_in_words(first_sms.created_at) %> ago
-      </div>
-      <div class='messages'>
-        <!-- sms messages partial here -->
-        Test message <%= thread.id %>
-      </div>
-    </div>
-  <% end %>
-
+  <%= render partial: "message_thread", collection: @message_threads %>
 </div>
 
 <div class="col-lg-8">
